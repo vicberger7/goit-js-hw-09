@@ -1,10 +1,10 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import { galleryItems } from '/img/gallery-images';
+// import SimpleLightbox from 'simplelightbox';
+// import 'simplelightbox/dist/simple-lightbox.min.css';
+import { galleryItems } from './gallery-images.js';
 
 const galleryUl = document.querySelector('.gallery');
 
-const galleryItems = images
+const galleryHtml = galleryItems
   .map(({ preview, original, description }) => {
     return `
     <li class="gallery-item">
@@ -16,9 +16,9 @@ const galleryItems = images
   })
   .join('');
 
-galleryUl.insertAdjacentHTML('afterbegin', galleryItems);
+galleryUl.insertAdjacentHTML('afterbegin', galleryHtml);
 
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+// const lightbox = new SimpleLightbox('.gallery a', {
+//   captionsData: 'alt',
+//   captionDelay: 250,
+// });
