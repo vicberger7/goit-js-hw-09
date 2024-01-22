@@ -3,9 +3,13 @@ window.onload = function () {
   let emailInput = document.querySelector('input[name="email"]');
   let messageTextarea = document.querySelector('textarea[name="message"]');
 
-  let formData = JSON.parse(localStorage.getItem('feedback-form-state'));
-  if (formData) {
+  let formData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
+
+  if (formData.email) {
     emailInput.value = formData.email;
+  }
+
+  if (formData.message) {
     messageTextarea.value = formData.message;
   }
 
@@ -14,7 +18,7 @@ window.onload = function () {
       event.target.tagName === 'INPUT' ||
       event.target.tagName === 'TEXTAREA'
     ) {
-      let formData = {
+      formData = {
         email: emailInput.value.trim(),
         message: messageTextarea.value.trim(),
       };
@@ -24,10 +28,14 @@ window.onload = function () {
 
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    let formData = JSON.parse(localStorage.getItem('feedback-form-state'));
-    console.log(formData);
-    localStorage.removeItem('feedback-form-state');
-    emailInput.value = '';
-    messageTextarea.value = '';
+
+    if (formData.email && formData.message) {
+      console.log(formData);
+      localStorage.removeItem('feedback-form-state');
+      emailInput.value = '';
+      messageTextarea.value = '';
+    } else {
+      alert('Будь ласка, заповніть усі поля форми перед відправленням.');
+    }
   });
 };
